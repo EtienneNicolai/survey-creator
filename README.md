@@ -52,7 +52,7 @@ cd ..
 ```
 
 ### Start
-Double-click `start.bat` — the app opens at http://localhost:8000
+Double-click `start.bat` the app opens at http://localhost:8000
 
 ---
 
@@ -63,6 +63,6 @@ Double-click `start.bat` — the app opens at http://localhost:8000
 3. Connect your GitHub fork
 4. Add a **PostgreSQL** database plugin in Railway
 5. Set a `SECRET_KEY` environment variable (any long random string)
-6. Railway builds and deploys automatically — you get a public URL
+6. Railway builds and deploys automatically you get a public URL
 
 The app uses SQLite locally and switches to PostgreSQL automatically on Railway via the `DATABASE_URL` environment variable.
