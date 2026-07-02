@@ -4,7 +4,7 @@ A web app for building and sharing surveys. Create an account, build a survey wi
 
 ## Using the app
 
-The app is hosted at: *(add your Railway URL here)*
+The app is hosted at: [web-production-b69175.up.railway.app](https://web-production-b69175.up.railway.app/)
 
 ### As a survey creator
 1. **Register** — create an account with your email and password
