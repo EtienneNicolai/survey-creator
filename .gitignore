@@ -1,0 +1,23 @@
+# Python packages (Railway installs these fresh from requirements.txt)
+backend/lib/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# SQLite local database
+*.db
+
+# Frontend build output (Railway rebuilds this)
+frontend/dist/
+
+# Frontend packages
+frontend/node_modules/
+
+# Environment files
+.env
+.env.local
+
+# Alembic cache
+alembic/versions/__pycache__/
