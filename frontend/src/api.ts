@@ -9,6 +9,19 @@ client.interceptors.request.use((config) => {
   return config;
 });
 
+client.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("token");
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 export const authApi = {
   register: (email: string, password: string) =>
     client.post<{ access_token: string }>("/api/auth/register", { email, password }),
