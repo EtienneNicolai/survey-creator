@@ -4,7 +4,7 @@ A web app for building and sharing surveys. Create an account, build a survey wi
 
 ## Using the app
 
-The app is hosted at: *(add your Railway URL here)*
+The app is hosted at: [web-production-b69175.up.railway.app](https://web-production-b69175.up.railway.app/)
 
 ### As a survey creator
 1. **Register** create an account with your email and password
@@ -49,7 +49,7 @@ cd ..
 ```
 
 ### Start
-Double-click `start.bat` — the app opens at http://localhost:8000
+Double-click `start.bat` the app opens at http://localhost:8000
 
 
 ## Deploying your own instance
@@ -59,6 +59,6 @@ Double-click `start.bat` — the app opens at http://localhost:8000
 3. Connect your GitHub fork
 4. Add a **PostgreSQL** database plugin in Railway
 5. Set a `SECRET_KEY` environment variable (any long random string)
-6. Railway builds and deploys automatically — you get a public URL
+6. Railway builds and deploys automatically you get a public URL
 
 The app uses SQLite locally and switches to PostgreSQL automatically on Railway via the `DATABASE_URL` environment variable.
