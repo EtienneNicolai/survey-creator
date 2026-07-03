@@ -7,20 +7,19 @@ A web app for building and sharing surveys. Create an account, build a survey wi
 The app is hosted at: *(add your Railway URL here)*
 
 ### As a survey creator
-1. **Register** — create an account with your email and password
-2. **Create a survey** — click **+ New Survey**, give it a title and optional description
-3. **Build it** — click **Builder** to open the drag-and-drop editor
+1. **Register** create an account with your email and password
+2. **Create a survey** click **+ New Survey**, give it a title and optional description
+3. **Build it** click **Builder** to open the drag-and-drop editor
    - Click **+ Add** to add questions (NPS, Rating, Multiple Choice, or Open Text)
    - Drag questions up and down to reorder them
    - Click a question to edit its label, options, or scale
-4. **Share it** — on the dashboard, click **Copy link** next to your survey and send it to anyone
-5. **View results** — click **Results** to see live charts as responses come in
-6. **Toggle active/inactive** — use the **Activate / Deactivate** button to open or close a survey to new responses
+4. **Share it** on the dashboard, click **Copy link** next to your survey and send it to anyone
+5. **View results** click **Results** to see live charts as responses come in
+6. **Toggle active/inactive** use the **Activate / Deactivate** button to open or close a survey to new responses
 
 ### As a respondent (no account needed)
 Open the link you were sent, answer the questions, and click **Submit**. That's it.
 
----
 
 ## Question types
 
@@ -30,8 +29,6 @@ Open the link you were sent, answer the questions, and click **Submit**. That's 
 | **Rating** | A 1–5 or 1–10 scale. Results show mean, median, and distribution chart |
 | **Multiple Choice** | Pick one option from a list. Results show a bar chart of counts |
 | **Open Text** | Free-text response. Results show a scrollable list of all answers |
-
----
 
 ## Running locally
 
@@ -54,7 +51,6 @@ cd ..
 ### Start
 Double-click `start.bat` — the app opens at http://localhost:8000
 
----
 
 ## Deploying your own instance
 
