@@ -1,6 +1,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { Question } from "../../types";
+import { colors, fonts, radius, shadow } from "../../theme-dark";
 
 interface QuestionCardProps {
   question: Question;
@@ -17,10 +18,10 @@ const TYPE_LABELS: Record<Question["type"], string> = {
 };
 
 const TYPE_COLORS: Record<Question["type"], string> = {
-  nps: "#6366f1",
-  rating: "#0ea5e9",
+  nps: colors.accent,
+  rating: colors.cyan,
   choice: "#f59e0b",
-  text: "#10b981",
+  text: "#34d399",
 };
 
 export default function QuestionCard({ question, isSelected, onSelect, onDelete }: QuestionCardProps) {
@@ -46,9 +47,10 @@ export default function QuestionCard({ question, isSelected, onSelect, onDelete 
           alignItems: "center",
           gap: "0.75rem",
           padding: "0.75rem",
-          background: isSelected ? "#f5f3ff" : "#fff",
-          border: isSelected ? "2px solid #6366f1" : "1px solid #e5e7eb",
-          borderRadius: "6px",
+          background: isSelected ? colors.accentSoft : colors.neutralFill,
+          border: isSelected ? `1px solid ${colors.accent}` : `1px solid ${colors.border}`,
+          borderRadius: radius.sm,
+          boxShadow: isSelected ? shadow.glow : "none",
           cursor: "pointer",
           userSelect: "none",
         }}
@@ -56,7 +58,7 @@ export default function QuestionCard({ question, isSelected, onSelect, onDelete 
         {/* Drag handle */}
         <span
           {...listeners}
-          style={{ cursor: "grab", color: "#9ca3af", fontSize: "1rem", flexShrink: 0, touchAction: "none" }}
+          style={{ cursor: "grab", color: colors.textMuted, fontSize: "1rem", flexShrink: 0, touchAction: "none" }}
           title="Drag to reorder"
         >
           ⠿
@@ -67,6 +69,7 @@ export default function QuestionCard({ question, isSelected, onSelect, onDelete 
           flexShrink: 0,
           padding: "0.125rem 0.4rem",
           borderRadius: "4px",
+          fontFamily: fonts.mono,
           fontSize: "0.6875rem",
           fontWeight: 700,
           backgroundColor: TYPE_COLORS[question.type] + "20",
@@ -77,14 +80,14 @@ export default function QuestionCard({ question, isSelected, onSelect, onDelete 
         </span>
 
         {/* Label */}
-        <span style={{ flex: 1, minWidth: 0, fontSize: "0.875rem", color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        <span style={{ flex: 1, minWidth: 0, fontSize: "0.875rem", color: colors.text, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
           {question.label}
         </span>
 
         {/* Delete button */}
         <button
           onClick={(e) => { e.stopPropagation(); onDelete(); }}
-          style={{ flexShrink: 0, padding: "0.2rem 0.4rem", border: "none", background: "none", cursor: "pointer", color: "#9ca3af", fontSize: "1rem" }}
+          style={{ flexShrink: 0, padding: "0.2rem 0.4rem", border: "none", background: "none", cursor: "pointer", color: colors.textMuted, fontSize: "1rem" }}
           title="Delete question"
         >
           ×
