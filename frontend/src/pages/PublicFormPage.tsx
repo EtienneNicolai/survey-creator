@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { publicApi } from "../api";
 import type { Survey, SubmitAnswer } from "../types";
+import { colors, fonts, radius, shadow, glassBlur } from "../theme-dark";
 
 export default function PublicFormPage() {
   const { token } = useParams<{ token: string }>();
@@ -58,18 +59,18 @@ export default function PublicFormPage() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#f3f4f6" }}>
-        <p>Loading survey...</p>
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: colors.bg }}>
+        <p style={{ color: colors.textMuted }}>Loading survey...</p>
       </div>
     );
   }
 
   if (notFound || !survey) {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#f3f4f6" }}>
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: colors.bg }}>
         <div style={{ textAlign: "center", padding: "2rem" }}>
-          <h2 style={{ color: "#374151" }}>Survey not found or no longer active</h2>
-          <p style={{ color: "#6b7280" }}>This survey link may have expired or been deactivated.</p>
+          <h2 style={{ color: colors.text }}>Survey not found or no longer active</h2>
+          <p style={{ color: colors.textMuted }}>This survey link may have expired or been deactivated.</p>
         </div>
       </div>
     );
@@ -78,10 +79,10 @@ export default function PublicFormPage() {
   const sorted = [...survey.questions].sort((a, b) => a.order_index - b.order_index);
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#f3f4f6", padding: "2rem 1rem" }}>
+    <div style={{ minHeight: "100vh", backgroundColor: colors.bg, padding: "2rem 1rem" }}>
       <div style={{ maxWidth: "640px", margin: "0 auto" }}>
         {/* Survey header */}
-        <div style={{ background: "#6366f1", color: "#fff", borderRadius: "8px 8px 0 0", padding: "2rem 2rem 1.5rem" }}>
+        <div style={{ background: colors.accent, color: "#fff", borderRadius: `${radius.md} ${radius.md} 0 0`, padding: "2rem 2rem 1.5rem", boxShadow: shadow.glow }}>
           <h1 style={{ margin: 0, fontSize: "1.5rem" }}>{survey.title}</h1>
           {survey.description && (
             <p style={{ margin: "0.5rem 0 0", opacity: 0.85, fontSize: "0.9375rem" }}>{survey.description}</p>
@@ -89,13 +90,25 @@ export default function PublicFormPage() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} style={{ background: "#fff", borderRadius: "0 0 8px 8px", padding: "1.5rem 2rem", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            background: colors.surfaceTranslucent,
+            backdropFilter: glassBlur,
+            WebkitBackdropFilter: glassBlur,
+            borderRadius: `0 0 ${radius.md} ${radius.md}`,
+            border: `1px solid ${colors.border}`,
+            borderTop: "none",
+            padding: "1.5rem 2rem",
+            boxShadow: shadow.modal,
+          }}
+        >
           {sorted.map((question, idx) => (
-            <div key={question.id} style={{ marginBottom: "2rem", paddingBottom: "2rem", borderBottom: idx < sorted.length - 1 ? "1px solid #e5e7eb" : "none" }}>
-              <label style={{ display: "block", marginBottom: "0.75rem", fontWeight: 500, color: "#111827", lineHeight: 1.4 }}>
-                <span style={{ fontSize: "0.75rem", color: "#9ca3af", display: "block", marginBottom: "0.2rem" }}>Q{idx + 1}</span>
+            <div key={question.id} style={{ marginBottom: "2rem", paddingBottom: "2rem", borderBottom: idx < sorted.length - 1 ? `1px solid ${colors.border}` : "none" }}>
+              <label style={{ display: "block", marginBottom: "0.75rem", fontWeight: 500, color: colors.text, lineHeight: 1.4 }}>
+                <span style={{ fontFamily: fonts.mono, fontSize: "0.75rem", color: colors.textMuted, display: "block", marginBottom: "0.2rem" }}>Q{idx + 1}</span>
                 {question.label}
-                <span style={{ color: "#ef4444", marginLeft: "0.2rem" }}>*</span>
+                <span style={{ color: colors.danger, marginLeft: "0.2rem" }}>*</span>
               </label>
 
               {/* NPS: 0–10 buttons */}
@@ -110,10 +123,11 @@ export default function PublicFormPage() {
                         style={{
                           width: "40px",
                           height: "40px",
-                          border: answers[question.id] === String(i) ? "2px solid #6366f1" : "1px solid #d1d5db",
-                          borderRadius: "6px",
-                          background: answers[question.id] === String(i) ? "#6366f1" : "#fff",
-                          color: answers[question.id] === String(i) ? "#fff" : "#374151",
+                          border: answers[question.id] === String(i) ? `1px solid ${colors.accent}` : `1px solid ${colors.border}`,
+                          borderRadius: radius.sm,
+                          background: answers[question.id] === String(i) ? colors.accent : colors.surface,
+                          color: answers[question.id] === String(i) ? "#fff" : colors.text,
+                          boxShadow: answers[question.id] === String(i) ? shadow.glow : "none",
                           cursor: "pointer",
                           fontWeight: 600,
                           fontSize: "0.9rem",
@@ -123,7 +137,7 @@ export default function PublicFormPage() {
                       </button>
                     ))}
                   </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginTop: "0.375rem", fontSize: "0.75rem", color: "#6b7280" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", marginTop: "0.375rem", fontSize: "0.75rem", color: colors.textMuted }}>
                     <span>0 — Not at all likely</span>
                     <span>10 — Extremely likely</span>
                   </div>
@@ -141,10 +155,11 @@ export default function PublicFormPage() {
                       style={{
                         width: "40px",
                         height: "40px",
-                        border: answers[question.id] === String(v) ? "2px solid #6366f1" : "1px solid #d1d5db",
-                        borderRadius: "6px",
-                        background: answers[question.id] === String(v) ? "#6366f1" : "#fff",
-                        color: answers[question.id] === String(v) ? "#fff" : "#374151",
+                        border: answers[question.id] === String(v) ? `1px solid ${colors.accent}` : `1px solid ${colors.border}`,
+                        borderRadius: radius.sm,
+                        background: answers[question.id] === String(v) ? colors.accent : colors.surface,
+                        color: answers[question.id] === String(v) ? "#fff" : colors.text,
+                        boxShadow: answers[question.id] === String(v) ? shadow.glow : "none",
                         cursor: "pointer",
                         fontWeight: 600,
                       }}
@@ -166,12 +181,13 @@ export default function PublicFormPage() {
                         alignItems: "center",
                         gap: "0.625rem",
                         padding: "0.625rem 0.875rem",
-                        border: answers[question.id] === opt ? "2px solid #6366f1" : "1px solid #d1d5db",
-                        borderRadius: "6px",
+                        border: answers[question.id] === opt ? `1px solid ${colors.accent}` : `1px solid ${colors.border}`,
+                        borderRadius: radius.sm,
                         cursor: "pointer",
-                        background: answers[question.id] === opt ? "#f5f3ff" : "#fff",
+                        background: answers[question.id] === opt ? colors.accentSoft : colors.surface,
+                        boxShadow: answers[question.id] === opt ? shadow.glow : "none",
                         fontSize: "0.9375rem",
-                        color: "#374151",
+                        color: colors.text,
                       }}
                     >
                       <input
@@ -180,7 +196,7 @@ export default function PublicFormPage() {
                         value={opt}
                         checked={answers[question.id] === opt}
                         onChange={() => setAnswer(question.id, opt)}
-                        style={{ accentColor: "#6366f1" }}
+                        style={{ accentColor: colors.accent }}
                       />
                       {opt}
                     </label>
@@ -194,7 +210,18 @@ export default function PublicFormPage() {
                   value={answers[question.id] ?? ""}
                   onChange={(e) => setAnswer(question.id, e.target.value)}
                   rows={4}
-                  style={{ width: "100%", padding: "0.625rem", border: "1px solid #d1d5db", borderRadius: "6px", fontSize: "0.9375rem", resize: "vertical", boxSizing: "border-box", fontFamily: "inherit" }}
+                  style={{
+                    width: "100%",
+                    padding: "0.625rem",
+                    border: `1px solid ${colors.border}`,
+                    borderRadius: radius.sm,
+                    fontSize: "0.9375rem",
+                    resize: "vertical",
+                    boxSizing: "border-box",
+                    fontFamily: "inherit",
+                    background: colors.surface,
+                    color: colors.text,
+                  }}
                   placeholder="Your answer..."
                 />
               )}
@@ -202,7 +229,7 @@ export default function PublicFormPage() {
           ))}
 
           {submitError && (
-            <div style={{ marginBottom: "1rem", padding: "0.75rem", backgroundColor: "#fee2e2", color: "#dc2626", borderRadius: "4px", fontSize: "0.875rem" }}>
+            <div style={{ marginBottom: "1rem", padding: "0.75rem", backgroundColor: colors.dangerSoft, color: colors.danger, borderRadius: radius.sm, fontSize: "0.875rem", border: `1px solid ${colors.dangerBorder}` }}>
               {submitError}
             </div>
           )}
@@ -213,19 +240,20 @@ export default function PublicFormPage() {
             style={{
               width: "100%",
               padding: "0.75rem",
-              backgroundColor: allAnswered ? "#6366f1" : "#d1d5db",
-              color: "#fff",
+              backgroundColor: allAnswered ? colors.accent : colors.disabledFill,
+              color: allAnswered ? "#fff" : colors.disabledText,
               border: "none",
-              borderRadius: "6px",
+              borderRadius: radius.sm,
               fontSize: "1rem",
               fontWeight: 600,
+              boxShadow: allAnswered ? shadow.glowStrong : "none",
               cursor: allAnswered && !submitting ? "pointer" : "not-allowed",
             }}
           >
             {submitting ? "Submitting..." : "Submit Response"}
           </button>
           {!allAnswered && (
-            <p style={{ textAlign: "center", fontSize: "0.8125rem", color: "#9ca3af", marginTop: "0.5rem" }}>
+            <p style={{ textAlign: "center", fontSize: "0.8125rem", color: colors.textMuted, marginTop: "0.5rem" }}>
               Please answer all questions to submit.
             </p>
           )}
