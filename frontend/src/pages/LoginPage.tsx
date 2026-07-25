@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { authApi } from "../api";
+import { playfulTheme } from "../theme-playful-login";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -25,48 +26,61 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#f3f4f6" }}>
-      <div style={{ background: "#fff", padding: "2rem", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0,0,0,0.1)", width: "100%", maxWidth: "400px" }}>
-        <h1 style={{ marginTop: 0, marginBottom: "1.5rem", fontSize: "1.5rem", color: "#111827" }}>Sign In</h1>
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: playfulTheme.colors.background, fontFamily: playfulTheme.fonts.base }}>
+      <div style={{ background: playfulTheme.colors.cardBackground, padding: "2.5rem", borderRadius: playfulTheme.radii.card, boxShadow: playfulTheme.shadows.card, width: "100%", maxWidth: "400px" }}>
+        <h1 style={{ marginTop: 0, marginBottom: "1.5rem", fontSize: "1.875rem", fontWeight: 700, color: playfulTheme.colors.text }}>Welcome back! 👋</h1>
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: "1rem" }}>
-            <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: 500, color: "#374151" }}>Email</label>
+            <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: 600, color: playfulTheme.colors.text }}>Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              style={{ width: "100%", padding: "0.5rem", border: "1px solid #d1d5db", borderRadius: "4px", fontSize: "1rem", boxSizing: "border-box" }}
+              style={{ width: "100%", padding: "0.75rem 1rem", border: `2px solid ${playfulTheme.colors.border}`, borderRadius: playfulTheme.radii.input, fontSize: "1rem", boxSizing: "border-box", fontFamily: playfulTheme.fonts.base, color: playfulTheme.colors.text }}
               placeholder="you@example.com"
             />
           </div>
           <div style={{ marginBottom: "1rem" }}>
-            <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: 500, color: "#374151" }}>Password</label>
+            <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: 600, color: playfulTheme.colors.text }}>Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              style={{ width: "100%", padding: "0.5rem", border: "1px solid #d1d5db", borderRadius: "4px", fontSize: "1rem", boxSizing: "border-box" }}
+              style={{ width: "100%", padding: "0.75rem 1rem", border: `2px solid ${playfulTheme.colors.border}`, borderRadius: playfulTheme.radii.input, fontSize: "1rem", boxSizing: "border-box", fontFamily: playfulTheme.fonts.base, color: playfulTheme.colors.text }}
               placeholder="••••••••"
             />
           </div>
           {error && (
-            <div style={{ marginBottom: "1rem", padding: "0.75rem", backgroundColor: "#fee2e2", color: "#dc2626", borderRadius: "4px", fontSize: "0.875rem" }}>
+            <div style={{ marginBottom: "1rem", padding: "0.75rem 1rem", backgroundColor: playfulTheme.colors.errorBg, color: playfulTheme.colors.errorText, borderRadius: playfulTheme.radii.input, fontSize: "0.875rem", fontWeight: 500 }}>
               {error}
             </div>
           )}
           <button
             type="submit"
             disabled={loading}
-            style={{ width: "100%", padding: "0.625rem", backgroundColor: "#6366f1", color: "#fff", border: "none", borderRadius: "4px", fontSize: "1rem", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1 }}
+            style={{
+              width: "100%",
+              padding: "0.875rem",
+              backgroundColor: playfulTheme.colors.primary,
+              color: "#fff",
+              border: "none",
+              borderRadius: playfulTheme.radii.pill,
+              fontSize: "1.0625rem",
+              fontWeight: 700,
+              fontFamily: playfulTheme.fonts.base,
+              cursor: loading ? "not-allowed" : "pointer",
+              opacity: loading ? 0.7 : 1,
+              boxShadow: playfulTheme.shadows.card,
+            }}
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
-        <p style={{ marginTop: "1rem", textAlign: "center", color: "#6b7280" }}>
+        <p style={{ marginTop: "1.5rem", textAlign: "center", color: playfulTheme.colors.textMuted }}>
           Don't have an account?{" "}
-          <Link to="/register" style={{ color: "#6366f1", textDecoration: "none" }}>Register</Link>
+          <Link to="/register" style={{ color: playfulTheme.colors.secondary, fontWeight: 600, textDecoration: "none" }}>Register</Link>
         </p>
       </div>
     </div>
