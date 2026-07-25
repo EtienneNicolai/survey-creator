@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { authApi } from "../api";
+import { corporateTheme } from "../theme-corporate-login";
+
+const { colors, radius, fontFamily } = corporateTheme;
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -25,48 +28,48 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#f3f4f6" }}>
-      <div style={{ background: "#fff", padding: "2rem", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0,0,0,0.1)", width: "100%", maxWidth: "400px" }}>
-        <h1 style={{ marginTop: 0, marginBottom: "1.5rem", fontSize: "1.5rem", color: "#111827" }}>Sign In</h1>
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: colors.background, fontFamily }}>
+      <div style={{ background: "#ffffff", padding: "2rem", borderRadius: radius, border: `1px solid ${colors.border}`, width: "100%", maxWidth: "400px" }}>
+        <h1 style={{ marginTop: 0, marginBottom: "1.5rem", fontSize: "1.375rem", fontWeight: 600, color: colors.heading }}>Sign In</h1>
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: "1rem" }}>
-            <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: 500, color: "#374151" }}>Email</label>
+            <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: 500, fontSize: "0.875rem", color: colors.bodyText }}>Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              style={{ width: "100%", padding: "0.5rem", border: "1px solid #d1d5db", borderRadius: "4px", fontSize: "1rem", boxSizing: "border-box" }}
+              style={{ width: "100%", padding: "0.5rem", border: `1px solid ${colors.border}`, borderRadius: radius, fontSize: "0.9375rem", fontFamily, boxSizing: "border-box", color: colors.heading }}
               placeholder="you@example.com"
             />
           </div>
           <div style={{ marginBottom: "1rem" }}>
-            <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: 500, color: "#374151" }}>Password</label>
+            <label style={{ display: "block", marginBottom: "0.25rem", fontWeight: 500, fontSize: "0.875rem", color: colors.bodyText }}>Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              style={{ width: "100%", padding: "0.5rem", border: "1px solid #d1d5db", borderRadius: "4px", fontSize: "1rem", boxSizing: "border-box" }}
+              style={{ width: "100%", padding: "0.5rem", border: `1px solid ${colors.border}`, borderRadius: radius, fontSize: "0.9375rem", fontFamily, boxSizing: "border-box", color: colors.heading }}
               placeholder="••••••••"
             />
           </div>
           {error && (
-            <div style={{ marginBottom: "1rem", padding: "0.75rem", backgroundColor: "#fee2e2", color: "#dc2626", borderRadius: "4px", fontSize: "0.875rem" }}>
+            <div style={{ marginBottom: "1rem", padding: "0.75rem", backgroundColor: colors.errorBg, color: colors.errorText, border: `1px solid ${colors.errorText}`, borderRadius: radius, fontSize: "0.8125rem" }}>
               {error}
             </div>
           )}
           <button
             type="submit"
             disabled={loading}
-            style={{ width: "100%", padding: "0.625rem", backgroundColor: "#6366f1", color: "#fff", border: "none", borderRadius: "4px", fontSize: "1rem", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1 }}
+            style={{ width: "100%", padding: "0.625rem", backgroundColor: colors.primary, color: "#ffffff", border: "none", borderRadius: radius, fontSize: "0.9375rem", fontWeight: 500, fontFamily, cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1 }}
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
-        <p style={{ marginTop: "1rem", textAlign: "center", color: "#6b7280" }}>
+        <p style={{ marginTop: "1rem", textAlign: "center", fontSize: "0.875rem", color: colors.bodyText }}>
           Don't have an account?{" "}
-          <Link to="/register" style={{ color: "#6366f1", textDecoration: "none" }}>Register</Link>
+          <Link to="/register" style={{ color: colors.primary, textDecoration: "none", fontWeight: 500 }}>Register</Link>
         </p>
       </div>
     </div>
