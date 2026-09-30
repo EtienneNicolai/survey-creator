@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: survey-creator
+    runtime: docker
+    plan: free
+    region: singapore
+    healthCheckPath: /
+    envVars:
+      # Paste the Neon connection string in the Render dashboard
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
