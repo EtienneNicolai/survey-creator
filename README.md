@@ -4,7 +4,9 @@ A web app for building and sharing surveys. Create an account, build a survey wi
 
 ## Using the app
 
-The app is hosted at: [web-production-b69175.up.railway.app](https://web-production-b69175.up.railway.app/)
+The app is hosted at: [survey-creator-5fkr.onrender.com](https://survey-creator-5fkr.onrender.com)
+
+It runs on a free hosting plan that sleeps when idle, so the first load can take up to a minute.
 
 ### As a survey creator
 1. **Register** create an account with your email and password
@@ -55,10 +57,9 @@ Double-click `start.bat` the app opens at http://localhost:8000
 ## Deploying your own instance
 
 1. Fork this repo on GitHub
-2. Create a project on [Railway](https://railway.app)
-3. Connect your GitHub fork
-4. Add a **PostgreSQL** database plugin in Railway
-5. Set a `SECRET_KEY` environment variable (any long random string)
-6. Railway builds and deploys automatically you get a public URL
+2. Create a free PostgreSQL database on [Neon](https://neon.tech) and copy its connection string
+3. On [Render](https://render.com), choose **New**, then **Blueprint**, and connect your fork
+4. Paste the Neon connection string as `DATABASE_URL` when prompted (`SECRET_KEY` is generated for you)
+5. Render builds the Docker image and deploys automatically, and you get a public URL
 
-The app uses SQLite locally and switches to PostgreSQL automatically on Railway via the `DATABASE_URL` environment variable.
+The app uses SQLite locally and switches to PostgreSQL automatically when the `DATABASE_URL` environment variable is set.
