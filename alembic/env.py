@@ -1,4 +1,3 @@
-import os
 from logging.config import fileConfig
 from sqlalchemy import engine_from_config, pool
 from alembic import context
@@ -12,8 +11,9 @@ if config.config_file_name is not None:
 from backend.src.data.models import Base
 target_metadata = Base.metadata
 
-DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///./survey_creator.db")
-config.set_main_option("sqlalchemy.url", DATABASE_URL)
+from backend.src.data.database import DATABASE_URL
+# % must be doubled for the ini-style config
+config.set_main_option("sqlalchemy.url", DATABASE_URL.replace("%", "%%"))
 
 
 def run_migrations_offline() -> None:
