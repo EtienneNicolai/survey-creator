@@ -21,9 +21,3 @@ frontend/node_modules/
 
 # Alembic cache
 alembic/versions/__pycache__/
-
-# Claude Code worktrees/scratch
-.claude/
-
-# Claude Code project instructions (kept local)
-CLAUDE.md
